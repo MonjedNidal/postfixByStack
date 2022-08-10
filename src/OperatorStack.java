@@ -16,29 +16,25 @@ public class OperatorStack {
             return top == stack.length-1;
         }
 
-        public void push (char value){
+        public void push (char ch){
             if (!isFull()){
-                top++;
-                stack[top] = value;
-            }else {
-                System.out.println("Stack is full");
+                stack[++top] = ch;
             }
         }
 
-        public void pop (){
+        public char pop (){
             if (!isEmpty()){
-                top--;
-            }else {
-                System.out.println("Stack is empty");
-            }
+                return stack[top--];
+            }return ' ';
+//            }else {
+//                System.out.println("Stack is empty");
+//            }
         }
 
-        public void peek(){
+        public char peek(){
             if (!isEmpty()){
-                System.out.println(stack[top]);
-            }else {
-                System.out.println("Stack is empty");
-            }
+                return stack[top];
+            }return ' ';
         }
 
 
