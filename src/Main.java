@@ -5,11 +5,17 @@ public class Main {
 //        System.out.print("Enter your equation: ");
 //        String eq = scanner.next();
         String eq = "3*(5+1)-4/2+3-1";
-        System.out.println(getPost(eq));
+        StringBuilder post = getPost(eq);
+        int res = solve(post);
+        System.out.println(post);
+        System.out.println(res);
 
     }
+
+
+
     public static StringBuilder getPost(String eq){
-        OperatorStack stack = new OperatorStack(100);
+        OpStack stack = new OpStack(100);
         StringBuilder post = new StringBuilder();
         for (int i = 0; i < eq.length(); i++) {
             char ch = eq.charAt(i);
@@ -68,4 +74,47 @@ public class Main {
         return 0;
     }
 
+    private static int solve(StringBuilder post) {
+        int res = 0;
+        int a = 0,b = 0;
+        OperandStack stack = new OperandStack();
+
+        for (int i = 0; i < post.length(); i++) {
+            switch (getType(post.charAt(i))){
+                case 1:
+                    stack.push(post.charAt(i) - '0');
+                    break;
+                case 2:
+                    if (!stack.isEmpty()){
+                        a = stack.pop();
+                    }else {
+                        System.out.println("Equation Error!..1");
+                    }
+                    if (!stack.isEmpty()){
+                        b = stack.pop();
+                    }else {
+                        System.out.println("Equation Error!..2");
+                    }
+                    res = operator(a,b,post.charAt(i));
+                    stack.push(res);
+            }
+        }
+        return res;
+
+    }
+
+    private static int operator(int b, int a, char c) {
+        switch (c){
+            case '+':
+                return a+b;
+            case '-':
+                return a-b;
+            case '*':
+                return a*b;
+            case '/':
+                return a/b;
+            default:
+                return 0;
+        }
+    }
 }

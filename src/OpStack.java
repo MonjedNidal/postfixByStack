@@ -1,9 +1,9 @@
-public class OperatorStack {
+public class OpStack {
 
         char[] stack;
         int top;
 
-        public OperatorStack(int n) {
+        public OpStack(int n) {
             stack = new char[n];
             top = -1;
         }
