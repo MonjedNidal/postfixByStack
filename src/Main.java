@@ -4,7 +4,7 @@ public class Main {
 
 //        System.out.print("Enter your equation: ");
 //        String eq = scanner.next();
-        String eq = "7+2-5*3/2*3-5";
+        String eq = "3*(5+1)-4/2+3-1";
         System.out.println(getPost(eq));
 
     }
@@ -23,6 +23,18 @@ public class Main {
                     }
                     stack.push(ch);
                     break;
+                case 3:
+                    stack.push(ch);
+                    break;
+                case 4:
+                    char c = stack.pop();
+                    while (!stack.isEmpty() && c != '('){
+                        post.append(c);
+                        c = stack.pop();
+                    }
+                    if (c != '('){
+                        System.out.println("Equation Error!");
+                    }
                 default:
             }
         }
@@ -33,7 +45,9 @@ public class Main {
     }
 
     private static int priority(char ch) {
-        if (ch == '+' || ch == '-'){
+        if (ch == '('){
+            return 1;
+        } else if (ch == '+' || ch == '-'){
             return 2;
         }else if (ch == '*' || ch == '/'){
             return 3;
@@ -46,6 +60,10 @@ public class Main {
             return 1;
         } else if (ch == '+' || ch == '-' || ch == '*' || ch == '/') {
             return 2;
+        }else if (ch == '(') {
+            return 3;
+        }else if (ch == ')') {
+            return 4;
         }
         return 0;
     }
