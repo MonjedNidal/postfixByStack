@@ -4,15 +4,35 @@ public class Main {
 
 //        System.out.print("Enter your equation: ");
 //        String eq = scanner.next();
-        String eq = "3*(5+1)-4/2+3-1";
-        StringBuilder post = getPost(eq);
-        int res = solve(post);
-        System.out.println(post);
-        System.out.println(res);
+        String eq = "()";
+//        StringBuilder post = getPost(eq);
+//        int res = solve(post);
+//        System.out.println(post);
+//        System.out.println(res);
 
+        System.out.println(isValidEquation(eq));
     }
 
-
+    public static boolean isValidEquation (String eq){
+        OpStack stack = new OpStack(100);
+        if (eq != null){
+            if (eq.equals("()")){
+                System.out.println("Empty Parentheses!");
+            }else{
+                for (int i = 0; i < eq.length(); i++) {
+                    if (eq.charAt(i) == '('){
+                        stack.push(eq.charAt(i));
+                    }else if (eq.charAt(i) == ')'){
+                        if (!stack.isEmpty()){
+                            stack.pop();
+                        }else {
+                            return false;
+                        }
+                    }
+                }return stack.isEmpty();
+            }
+        }return false;
+    }
 
     public static StringBuilder getPost(String eq){
         OpStack stack = new OpStack(100);

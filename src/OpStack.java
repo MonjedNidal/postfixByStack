@@ -8,6 +8,8 @@ public class OpStack {
             top = -1;
         }
 
+
+
         public boolean isEmpty(){
             return top == -1;
         }
@@ -26,9 +28,6 @@ public class OpStack {
             if (!isEmpty()){
                 return stack[top--];
             }return ' ';
-//            }else {
-//                System.out.println("Stack is empty");
-//            }
         }
 
         public char peek(){
